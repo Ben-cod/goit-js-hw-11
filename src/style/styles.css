@@ -1,13 +1,3 @@
-body {
-  margin: 0;
-  padding: 0;
-}
-
-img {
-  display: block;
-  width: 100%;
-  height: 175px;
-}
 
 body {
   font-family: Arial, sans-serif;
@@ -15,6 +5,13 @@ body {
   padding-bottom: 15px;
   background-image: url("/src/imeges/flag-of-ukraine\ \(1\).jpg");
   background-size: 100rem;
+  margin: 0;
+  padding: 0;
+}
+img {
+  display: block;
+  width: 100%;
+  height: 175px;
 }
 
 button {
