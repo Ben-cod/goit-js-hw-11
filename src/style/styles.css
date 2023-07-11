@@ -24,6 +24,7 @@ button {
 }
 
 .search-form {
+  padding-top: 10px;
   max-width: 37.5rem;
   align-items: center;
   margin: 0 auto;
