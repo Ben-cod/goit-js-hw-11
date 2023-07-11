@@ -1,0 +1,130 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 175px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  letter-spacing: 0.02em;
+  padding-bottom: 15px;
+  background-image: url("/src/imeges/flag-of-ukraine\ \(1\).jpg");
+  background-size: 100rem;
+}
+
+button {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-form {
+  max-width: 37.5rem;
+  align-items: center;
+  margin: 0 auto;
+  display: flex;
+}
+
+.search-form input {
+  max-width: 37.5rem;
+  width: 20rem;
+  height: 2.75rem;
+  color: #ae1100;
+  text-shadow: 1px 1px 1px #fff;
+  letter-spacing: .075rem;
+  background-color: #ebecf0;
+  border: none;
+  border-radius: 2.5rem;
+  outline: none;
+  flex-grow: 1;
+  padding: 0.3125rem 0.9375rem;
+  font-size: .875rem;
+  font-weight: 600;
+  transition: all .2s ease-in-out;
+  box-shadow: inset 2px 2px 3px #babecc, inset -3px -3px 7px #fff;
+}
+
+.search-form input:focus {
+  outline: none;
+}
+
+.wrapper-form {
+  position: relative;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-form button {
+  max-width: 9.375rem;
+  height: ;
+  cursor: pointer;
+  color: #ae1100;
+  text-shadow: 1px 1px 1px #fff;
+  text-transform: capitalize;
+  border: 0;
+  border-radius: 320px;
+  outline: 0;
+  align-items: center;
+  margin-left: 0.625rem;
+  padding: 0.625rem 1.25rem;
+  font-weight: 600;
+  transition: all .2s ease-in-out;
+  display: flex;
+  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+
+  background-color: transparent;
+}
+
+.gallery {
+  display: grid;
+  max-width: 1140px;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  
+  grid-gap: 12px;
+  justify-content: center;
+  padding-top: 52px;
+  list-style: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.photo-card {
+  box-shadow: 0px 1px 3px 1px #000000;
+  max-width: 270px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info {
+  display: flex;
+  padding: 8px;
+  font-size: 12px;
+}
+
+.info-item {
+  text-align: center;
+  margin: 0;
+}
+
+.info-item b {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.load-more {
+  display: none;
+  padding: 8px;
+  margin: 15px auto;
+
+  color: #f2f2f2;
+  background-color: red;
+}
+
+.is-active {
+  display: block;
