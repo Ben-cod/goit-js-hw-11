@@ -136,7 +136,8 @@ async function onLoadPage(entries, observer){
             observer.unobserve(infiniteScroll);
             return;
         }
-        
+        await renderData();
+        smoothScroll();
         lightbox.refresh();
     }
   });
