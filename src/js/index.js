@@ -61,9 +61,9 @@ async function onImageSearch(e){
     observer.unobserve(infiniteScroll);
     galleryEl.innerHTML = '';
 
-  
+    await renderData();
     observer.observe(infiniteScroll);
-
+  
     setLightbox();
 };
 
@@ -78,8 +78,8 @@ async function renderData(){
             Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.'); 
             return
         }
-            else if (page === 1) {
-              Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+           if (page === 1) {
+              Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`)
             }
         galleryEl.insertAdjacentHTML('beforeend', getMarkupItem(hits));
         
@@ -136,7 +136,7 @@ async function onLoadPage(entries, observer){
             observer.unobserve(infiniteScroll);
             return;
         }
-        await renderData();
+        
         lightbox.refresh();
     }
   });
