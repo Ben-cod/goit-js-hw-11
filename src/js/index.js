@@ -1,14 +1,16 @@
 
+
+
 import axios from "axios";
 import Notiflix from 'notiflix';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-const formEl = document.querySelector('.search-form')
-const galleryEl = document.querySelector('.gallery')
-const infiniteScroll = document.querySelector('.js-scroll')
+const formEl = document.querySelector('.search-form');
+const galleryEl = document.querySelector('.gallery');
+const infiniteScroll = document.querySelector('.js-scroll');
 
-formEl.addEventListener('submit', onImageSearch)
+formEl.addEventListener('submit', onImageSearch);
 
 Notiflix.Notify.init({
     position: 'center-top',
@@ -30,7 +32,7 @@ const API_KEY = '38045322-2f369602cee0bc2677197c244';
 
 let page = 1;
 let totalPage = 0;
-const itemsOnPage = 30;
+const itemsOnPage = 40;
 let currentSearch = '';
 
 const searchParams = new URLSearchParams({
@@ -43,28 +45,26 @@ const searchParams = new URLSearchParams({
 });
 
 async function getData(value){
-    const response = await axios.get(`${BASE_URL}?${searchParams}&q=${value}`
-    );
-    return response.data  
+    const response = await axios.get(`${BASE_URL}?${searchParams}&q=${value}`);
+    return response.data;
 };
 
 async function onImageSearch(e){
     e.preventDefault();
-   const {searchQuery: {value}} = e.currentTarget.elements
-   
+    const {searchQuery: {value}} = e.currentTarget.elements;
    
     if(value.trim() === ''){
-        Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.'
-        ); 
+        Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.'); 
     }
     currentSearch = value;
     page = 1;
+    observer.unobserve(infiniteScroll);
     galleryEl.innerHTML = '';
 
-    await renderData()
-    observer.observe(infiniteScroll)
+  
+    observer.observe(infiniteScroll);
 
-    setLightbox()
+    setLightbox();
 };
 
 async function renderData(){
@@ -72,21 +72,20 @@ async function renderData(){
         searchParams.set('page', page);
         const data = await getData(currentSearch);
         const {hits, totalHits} = data;
-        totalPage = Math.ceil(totalHits / itemsOnPage)
+        totalPage = Math.ceil(totalHits / itemsOnPage);
 
         if(hits.length === 0){
             Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.'); 
+            return
         }
-        if(page === 1){
-            Notiflix.Notify.success('Hooray! We found totalHits images.')
-        }
-        galleryEl.insertAdjacentHTML('beforeend', getMarkupItem(hits))
+            else if (page === 1) {
+              Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+            }
+        galleryEl.insertAdjacentHTML('beforeend', getMarkupItem(hits));
         
     } catch (error) {
-        console.error(error.message)
+        console.error(error.message);
     }
-
-
 };
 
 function getMarkupItem(arr){
@@ -94,7 +93,7 @@ function getMarkupItem(arr){
     `<div class="photo-card">
     <a href="${largeImageURL}">
     <img src="${webformatURL}" alt="${tags}" loading="lazy" />
-</a>
+    </a>
     <div class="info">
       <p class="info-item">
         <b>Likes</b>
@@ -113,19 +112,11 @@ function getMarkupItem(arr){
         ${downloads}
       </p>
     </div>
-  </div>`).join('')
-  return photoCard
+  </div>`).join('');
+  return photoCard;
 };
 
-function smoothScroll(){
-    const { height: cardHeight } = galleryEl
-  .firstElementChild.getBoundingClientRect();
 
-    window.scrollBy({
-    top: cardHeight * 2,
-    behavior: "smooth",
-    });
-};
 
 function setLightbox() {
     lightbox = new SimpleLightbox('.photo-card a', {
@@ -140,15 +131,13 @@ async function onLoadPage(entries, observer){
   entries.forEach(async (entry) => {
     if(entry.isIntersecting){
         page += 1;
-        if(page > totalPage){
+        if(page === totalPage){
             Notiflix.Notify.warning('We are sorry, but you have reached the end of search results.');
-            observer.unobserver(infiniteScroll);
-            return
+            observer.unobserve(infiniteScroll);
+            return;
         }
         await renderData();
-        smoothScroll();
         lightbox.refresh();
-    };
+    }
   });
-
-};
+}
