@@ -137,7 +137,7 @@ async function onLoadPage(entries, observer){
             return;
         }
         await renderData();
-        smoothScroll();
+        
         lightbox.refresh();
     }
   });
